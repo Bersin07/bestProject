@@ -139,12 +139,12 @@ def listen_for_stop_key():
             break
             
 # Configure Google Gemini AI
-GOOGLE_API_KEY = "AIzaSyAR_I0eNjyXG9jBiHsYEP_gUeTh2TSK7tM"  # Replace with your actual API key
+GOOGLE_API_KEY = ""  # Replace with your actual API key
 genAI.configure(api_key=GOOGLE_API_KEY)
 gemini_model = genAI.GenerativeModel('gemini-1.5-flash')
 
 # Constants for Google Custom Search (if needed)
-CSE_ID = 'e12af751d60d2466e'  # Replace with your actual CSE ID
+CSE_ID = ''  # Replace with your actual CSE ID
 
 # Load Encodings and Class Names (if applicable for context-based responses)
 with open('encodings.pkl', 'rb') as f:
@@ -487,7 +487,7 @@ def start_language(language):
 
 
 # Load environment variables from .env file
-geminiAPI = 'AIzaSyANsCXLLMosM1qdpp_7Rf4gJmwqPlqPLXQ'
+geminiAPI = ''#replace your API
 
 # Configure the generative AI with the API key
 try:
@@ -686,80 +686,6 @@ def get_static_response(question):
     question = question.lower()
     static_responses = {
         # Common responses
-        "are you developed by google": "No, I'm developed by a team of engineers from i Spark.",
-        "are you created by google": "No, I'm developed by a team of engineers from i Spark.",
-        "are you developed by gemini": "No, I'm developed by a team of engineers from i Spark.",
-        "are you created by gemini": "No, I'm developed by a team of engineers from i Spark.",
-        "are you developed by google ai": "No, I'm developed by a team of engineers from i Spark.",
-        "are you created by google ai": "No, I'm developed by a team of engineers from i Spark.",
-        "are you developed by palm2": "No, I'm developed by a team of engineers from i Spark.",
-        "are you created by palm2": "No, I'm developed by a team of engineers from i Spark.",
-        "are you created by google": "NO! I was created by a team of software developers and engineers from iSpark Team",
-        "who developed you": "I was developed by a team of software developers and engineers from iSpark Team.",
-        "who created you": "I was created by a team of software developers and engineers from iSpark Team.",
-        "who are you": "I'm i Smart, an AI teacher created by iSpark Learning Solutions. I enhance education through innovative technology.",
-        "whats your name": "I'm i Smart, your AI teacher.",
-        "what is your name": "I'm i Smart, your AI teacher.",
-        "please tell your name": "I'm i Smart, your AI teacher.",
-        "tell me about yourself": "I'm i Smart, version 1. Your AI Teacher. Created by Team i Spark.",
-        "tell your name": "I'm i Smart, your AI teacher.",
-        "who made you": "I was made by a team of software developers and engineers from iSpark Team.",
-        "who designed you": "I was designed by a team of software developers and engineers from iSpark Team.",
-        "who programmed you": "A team of software developers and engineers from iSpark Team.",
-        "who built you": "I was built by a team of software developers and engineers from iSpark Team.",
-        "who is your developer": "iSpark Learning Solutions.",
-        "who is your creator": "iSpark Learning Solutions.",
-        "who is your god": "I am not human, but I am created by the team at iSpark.",
-        "who is responsible for making you": "iSpark Learning Solutions.",
-        "who constructed you": "iSpark Learning Solutions.",
-        "who is your engineering team": "A talented team from iSpark Learning Solutions.",
-        # Responses about team members (including "Mr.")
-        "who is mr joseph varghese": (
-            "Mr Joseph Varghese, founder & Chairman, is the President of the Elenjikal Group and Managing Director of TCM Ltd, a historic chemical manufacturer in India. He is steering- i-Spark Learning Solutions -towards leadership in skills-focused STEM education for the digital and AI era."
-        ),
-        "who is mr jerome": (
-            "Mr Jerocin, Education Program Manager at iSpark Learning Solutions, manages educational programs across schools, focusing on hands-on learning and ensuring effective implementation of iSpark's strategies."
-        ),
-        "who is mr saravana muthukumaran": (
-            "Mr Saravanamuthukumaran, Senior Manager (Institutional Business & Partnership), has over 18 years of diverse experience in R&D, academia, and operational management."
-        ),
-        "who is mr pratap": (
-            "Mr Prathap, a Research and Development Engineer at iSpark Learning Solutions, leverages his experience in quality control and machinery operation to design innovative STEM education tools."
-        ),
-        "who is mr karry venkatesh": (
-            "Mr Karry Venkatesh, ex-Senior Engineer – Robotics & Automation at iSpark Learning Solutions, excels in designing electronic gadgets and robotics kits, and developing real-time cloud applications."
-        ),
-        "who is mr avinash": (
-            "Mr Avinash Kumar E, Senior Graphic Designer, combines over 6 years of design experience with an MBA to create visually appealing and strategically sound designs."
-        ),
-        "who is mr yograj": (
-            "Mr Yogaraj, Technical Support at iSpark Learning Solutions, transitioned from the textile industry to tech after completing his BCA in Cuddalore District."
-        ),
-        "who is mr zaman": (
-            "Mr Mohd Zaman, an ex-R&D Executive at iSpark Learning Solutions, is a Mechanical Engineer with extensive experience in robotics, IoT, and microcontrollers."
-        ),
-        "who is mr saravanan krishnamurthy": (
-            "Mr Saravanan Krishnamoorthy, Senior Technical Engineer, specializes in technical support for BMS, CCTV, and fire alarms."
-        ),
-        "who is mr ph mohana murthy": (
-            "Mr P H Mohanamurthy Pagadala, Co-founder, CEO & MD, is an industry veteran with over three decades in Robotics, Industrial Automation, Product Development, R&D, and STEM Education."
-        ),
-        "who is mr mohana murthy": (
-            "Mr P H Mohanamurthy Pagadala, Co-founder, CEO & MD, is an industry veteran with over three decades in Robotics, Industrial Automation, Product Development, R&D, and STEM Education."
-        ),
-        # Other static responses
-        "tell me about ice park learning solutions": (
-            "iSpark Learning Solutions bridges digital and economic divides in Indian education, equipping students with 21st-century skills."
-        ),
-        "what is your purpose": (
-            "My purpose is to enhance your learning experience, assisting students and teachers with innovative tools and technologies."
-        ),
-        "what can you do in a school as an ai teacher": (
-            "As an AI teacher, I assist with answering questions, managing attendance, and providing an engaging learning experience."
-        ),
-        "why were you created": (
-            "I was created to revolutionize education, making learning accessible, interactive, and engaging."
-        ),
     }
 
     for key, response in static_responses.items():
