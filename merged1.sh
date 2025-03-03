@@ -1,0 +1,1 @@
+python /home/admin/Downloads/myTeacher/merged1.py

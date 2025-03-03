@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Please Wait...</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f4f8;
+            font-family: Arial, sans-serif;
+        }
+
+        .loading-container {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.5rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body data-ip="{{ ip }}">
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <div class="loading-text">Please wait...</div>
+    </div>
+
+    <script>
+        async function checkRoute() {
+            // Get the current IP from the data attribute on the body tag
+            const currentIP = document.body.getAttribute('data-ip');
+            
+            // Build the URL to check
+            const targetURL = `http://${currentIP}:5001/`;
+
+            try {
+                console.log(`Checking if route is available: ${targetURL}`); // Debugging log
+                const response = await fetch(targetURL, { method: 'HEAD' });
+                
+                if (response.ok) {
+                    console.log('Route is available. Redirecting now...'); // Debugging log
+                    // If the target route is available, redirect to it
+                    window.location.href = targetURL;
+                } else {
+                    console.log('Route not ready. Retrying in 2 seconds...'); // Debugging log
+                    // Keep checking every 2 seconds if not ready
+                    setTimeout(checkRoute, 2000);
+                }
+            } catch (error) {
+                console.error('Error while checking the route:', error); // Debugging log
+                // Retry on any error (e.g., network issues)
+                setTimeout(checkRoute, 2000);
+            }
+        }
+
+        // Start checking the route when the page loads
+        document.addEventListener('DOMContentLoaded', checkRoute);
+    </script>
+</body>
+</html>

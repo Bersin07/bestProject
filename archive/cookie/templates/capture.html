@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Pose</title>
+</head>
+<body>
+    <h2>Pose/Emotion: {{ pose }}</h2>
+    <div>
+        <img id="camera-feed" src="{{ url_for('video_feed') }}" alt="Camera Feed">
+    </div>
+    
+    <!-- Hidden inputs to store pose details -->
+    <input type="hidden" id="index" value="{{ index }}">
+    <input type="hidden" id="person_name" value="{{ person_name }}">
+    <input type="hidden" id="emp_id" value="{{ emp_id }}">
+    <input type="hidden" id="team_name" value="{{ team_name }}">
+
+    <button onclick="captureImage()">Capture</button>
+    <button onclick="nextPose({{ index }})">Next Pose</button>
+</body>
+
+<script>
+    function captureImage() {
+        const index = document.getElementById('index').value;
+        const personName = document.getElementById('person_name').value;
+        const empId = document.getElementById('emp_id').value;
+        const teamName = document.getElementById('team_name').value;
+
+        fetch('/capture_image', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                index: index,
+                person_name: personName,
+                emp_id: empId,
+                team_name: teamName
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            if (data.status === 'success') {
+                nextPose(data.next_index);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to capture image.');
+        });
+    }
+
+    function nextPose(currentIndex) {
+        window.location.href = '/capture/' + (parseInt(currentIndex) + 1);
+    }
+</script>
+</html>

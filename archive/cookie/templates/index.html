@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Data Collector</title>
+</head>
+<body>
+    <h1>Face Data Collector</h1>
+    <form action="/start" method="POST">
+        <label for="name">Enter the name of the person:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="emp_id">Enter the employee ID:</label>
+        <input type="text" id="emp_id" name="emp_id" required><br><br>
+
+        <label for="team_name">Enter the team name:</label>
+        <input type="text" id="team_name" name="team_name" required><br><br>
+
+        <label for="webcam">Select Webcam:</label>
+        <select id="webcam" name="webcam">
+            {% for webcam in webcams %}
+                <option value="{{ loop.index0 }}">{{ webcam }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <button type="submit">Start</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Interface</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            max-width: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.5s; /* Animation */
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Logo Animation */
+        #logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+            animation: logoAnimation 1s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes logoAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+            animation: slideInFromLeft 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideInFromLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            margin: 15px 0;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+        }
+
+        .btn:focus {
+            outline: none;
+        }
+
+        .btn i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .mode-message {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #555;
+            opacity: 0;
+            animation: fadeInMessage 1s ease-in-out forwards 1s;
+        }
+
+        @keyframes fadeInMessage {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Preloader and Content */
+        #preloader {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 26px;
+            }
+            .btn {
+                font-size: 16px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo Placeholder: Replace with your actual logo -->
+        <img id="logo" src="https://www.isparkinnovators.com/logos/iSpark%20logo_final.png" alt="Logo">
+
+        <h1>Select Your Mode</h1>
+        <button class="btn" onclick="window.location.href='/ai_mode'" id="aiModeButton">
+            <i class="fas fa-robot"></i> AI Mode
+        </button>
+        <button class="btn" onclick="window.location.href='/desktop_mode'">
+            <i class="fas fa-desktop"></i> Desktop Mode
+        </button>
+
+        {% if mode %}
+        <div class="mode-message">
+            <p>{{ mode }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        document.getElementById('aiModeButton').addEventListener('click', function() {
+            // Run the shell script on the server using an AJAX request
+            fetch('/ai_mode', { method: 'GET' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Open a new tab with the current IP and port 5001
+                        const ip = '192.168.1.52'; // Use the correct IP here
+                        const port = 5001;
+                        const url = `http://${ip}:${port}`; // Correct the string interpolation
+                        window.open(url, '_blank'); // Open the new tab
+                    } else {
+                        console.error('AI Mode failed to start');
+                    }
+                })
+                .catch(error => console.error('Error running AI mode:', error));
+        });
+
+        // Preloader Functionality (for enhanced UX)
+        window.onload = function () {
+            const preloader = document.getElementById('preloader');
+            const content = document.querySelector('.container');
+
+            setTimeout(() => {
+                preloader.style.display = 'none';
+                content.style.display = 'block';
+            }, 2000); // Delay to hide preloader
+        };
+    </script>
+
+</body>
+</html>

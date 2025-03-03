@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSV File Manager</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .file-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-around;
+        }
+        .file-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #f1f1f1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            word-wrap: break-word;
+        }
+        .file-item:hover {
+            transform: scale(1.05);
+        }
+        .file-item i {
+            font-size: 50px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .file-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            width: 100%;
+            overflow-wrap: break-word;
+        }
+        .file-item a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CSV File Manager</h1>
+        <div class="file-list">
+            {% for file in files %}
+                <div class="file-item">
+                    <i class="fas fa-file-csv"></i>
+                    <a href="{{ url_for('view_csv', filename=file) }}">{{ file }}</a>
+                </div>
+            {% endfor %}
+        </div>
+                <button class="back-button" onclick="stop_excel()">Back</button>
+
+    </div>
+    <script>
+		function stop_excel(){
+            fetch('http://' + window.location.hostname + ':5001/stop_excel', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = 'http://' + window.location.hostname + ':5001/';  // Redirect to kiosk home
+                } else {
+                    console.error('Failed to stop audio:', response.statusText);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+	</script>
+</body>
+</html>

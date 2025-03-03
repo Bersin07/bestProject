@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=true
+Exec=/home/admin/Downloads/archive/detect.sh
+Name=Detect
+Icon=/home/admin/chatbotcontroller.ico
+Categories=Utility;

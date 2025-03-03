@@ -1,0 +1,226 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Background */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Chat Container */
+.chat-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.header {
+    background-color: #0078d7;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+/* Chat Box */
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    margin-top: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Messages */
+.message {
+    max-width: 80%;
+    padding: 12px 18px;
+    border-radius: 15px;
+    font-size: 1em;
+    line-height: 1.5;
+    animation: fadeIn 0.3s ease;
+    margin: 5px 0;
+    word-wrap: break-word; /* Break long words to fit container */
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: #0078d7;
+    color: white;
+    border-bottom-right-radius: 0;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: #e1e1e1;
+    color: black;
+    border-bottom-left-radius: 0;
+}
+
+/* Code Block Styling */
+code, pre {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap; /* Wrap long lines */
+    overflow-x: auto; /* Horizontal scroll for very long lines */
+    display: block;
+}
+
+.bot-message code, .bot-message pre {
+    font-size: 0.95em;
+    overflow-x: auto;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* Ordered List Styling */
+ol {
+    padding-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    list-style-type: decimal;
+}
+
+/* Input Container */
+.input-container {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1em;
+    background-color: #f4f4f6;
+}
+
+button {
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+button img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scrollbar Styling */
+.chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border-radius: 5px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .chat-container {
+        padding: 15px;
+    }
+
+    .header {
+        font-size: 1em;
+        padding: 10px;
+    }
+
+    .input-container input[type="text"] {
+        font-size: 0.9em;
+    }
+
+    .message {
+        font-size: 0.9em;
+    }
+
+    button {
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-container {
+        padding: 10px;
+    }
+
+    .header {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .message {
+        font-size: 0.85em;
+        padding: 10px 14px;
+    }
+
+    .input-container {
+        padding: 8px;
+    }
+
+    .input-container input[type="text"] {
+        padding: 10px;
+        font-size: 0.85em;
+    }
+
+    button {
+        padding: 10px 12px;
+    }
+
+    button img {
+        width: 20px;
+        height: 20px;
+    }
+}

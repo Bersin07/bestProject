@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px 20px;
+        }
+
+        header img {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        h1 {
+            color: #ef7c00; /* Orange color matching the theme logo */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            border: none;
+            padding: 15px 30px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.2s;
+            flex: 1 1 200px;
+            max-width: 250px;
+        }
+
+        .start-button {
+            background-color: #0073b6; /* Primary theme color */
+            color: white;
+        }
+
+        .stop-button {
+            background-color: #ef7c00; /* Orange color */
+            color: white;
+        }
+
+        .back-button {
+            background-color: #f44336; /* Red color */
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 600px) {
+            button {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://isparkinnovators.com/logos/iSpark%20logo_final.png" alt="Company Logo">
+    </header>
+    <h1>Welcome All!</h1>
+    <div class="button-container">
+        <button class="start-button" onclick="playAudio()">Start Wishing</button>
+        <button class="stop-button" onclick="stopAudio()">Stop Wishing</button>
+        <button class="back-button" onclick="stop_audio_play()">Back</button>
+    </div>
+
+    <script>
+        function playAudio() {
+            fetch('/play').then(response => response.text()).then(data => console.log(data));
+        }
+
+        function stopAudio() {
+            fetch('/stop').then(response => response.text()).then(data => console.log(data));
+        }
+
+        function stop_audio_play() {
+            fetch('http://' + window.location.hostname + ':5001/stop_audio_play', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = 'http://' + window.location.hostname + ':5001/';  // Redirect to kiosk home
+                } else {
+                    console.error('Failed to stop audio:', response.statusText);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
