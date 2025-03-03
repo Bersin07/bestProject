@@ -41,7 +41,7 @@ Due to its complexity and deep integration with **specialized hardware and cloud
 - Custom Linux system configurations
 
 ## Usage
-- Start the robot using `python main.py`
+- Start the robot using `python app.py` in aidesktopmode
 - It will listen for voice commands and respond accordingly
 - Facial recognition will be triggered when a user is detected
 
